@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7c98585cd5fe6a651f0723625fe7fe369a3ee1d73ed994988d6294baa189445c"
+            "sha256": "56ef108d58ce3a8a655dc6d339ae770aa121dd35f0ecc6b57e6275e078213fb2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,8 +15,7 @@
             }
         ]
     },
-    "default": {},
-    "develop": {
+    "default": {
         "aiohttp": {
             "hashes": [
                 "sha256:03543dcf98a6619254b409be2d22b51f21ec66272be4ebda7b04e6412e4b2e14",
@@ -593,14 +592,6 @@
             "markers": "platform_system == 'Windows'",
             "version": "==223"
         },
-        "python-dotenv": {
-            "hashes": [
-                "sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba",
-                "sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a"
-            ],
-            "index": "pypi",
-            "version": "==1.0.0"
-        },
         "pyttsx3": {
             "hashes": [
                 "sha256:a585b6d8cffc19bd92db1e0ccbd8aa9c6528dd2baa5a47045d6fed542a44aa19"
@@ -764,5 +755,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==1.9.2"
         }
-    }
+    },
+    "develop": {}
 }
