@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "==0.97.0"
+uvicorn = "==0.22.0"
+pymongo = "==4.3.3"
+passlib = "==1.7.4"
+pyttsx3 = "==2.90"
+openai = "==0.27.8"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+
+[scripts]
+start = "python main.py"
