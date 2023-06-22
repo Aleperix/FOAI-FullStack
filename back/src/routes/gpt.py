@@ -1,4 +1,4 @@
-import os, openai, pyttsx3, random
+import os, openai, pyttsx3, random, json
 from fastapi import APIRouter, Response, status
 from ..models.gpt import Gpt
 from ..config.db import conn
@@ -18,6 +18,7 @@ def create_one_gpt(gpt: Gpt):
     id = conn["gpt"].insert_one(new_gpt).inserted_id
     gpt = conn["gpt"].find_one({"_id": id})
     file_name = "./speech"+str(random.randint(1,999999))+".mp3"
+    # gpt["prompt"] = json.loads(new_gpt["prompt"])["new"]
     gpt["src"] = generate_audio(new_gpt["response"], file_name, new_gpt["language"])
     os.remove(file_name)
     return gptEntity(gpt)
@@ -58,16 +59,29 @@ def delete_one_gpt(id: str):
 ##Methods
 def get_gpt_response(prompt, lang):
     print(prompt, lang)
+    prompt = json.loads(prompt)
     if lang == "en_US":
-        prompt = "Generate an answer(only text without format) in english to the following question: "+prompt+"{}"
+        prompt = "Generate an answer in english to the following question: "+prompt+"{}"
+        # if not "previous" in prompt:
+        #     prompt = "Generate an answer in english to the following question: "+prompt["new"]+"{}"
+        # else:
+        #     new_prompt = prompt["new"]
+        #     prompt =  "My previous prompt: "+prompt["previous"]["prompt"]+" your previous response: "+prompt["previous"]["response"]+". "
+        #     prompt += "My new prompt, but based on the previous one if possible: "+new_prompt+"{}"
     elif lang == "es_ES":
-        prompt = "Genera una respuesta(solo texto sin formato) en español para la siguiente consulta: "+prompt+"{}"
+        prompt = "Genera una respuesta en español para la siguiente consulta: "+prompt+"{}"
+        # if not "previous" in prompt:
+        #     prompt = "Genera una respuesta en español para la siguiente consulta: "+prompt["new"]+"{}"
+        # else:
+        #     new_prompt = prompt["new"]
+        #     prompt = "Mi prompt anterior: "+prompt["previous"]["prompt"]+" tu respuesta anterior: "+prompt["previous"]["response"]+". "
+        #     prompt += "Mi nuevo prompt pero basado en lo anterior si es posible: "+new_prompt+"{}"
     openai.api_key = os.environ["GPT_KEY"]
 
     completion = openai.Completion.create(engine="text-davinci-003",
                                             prompt=prompt,
                                             n=1,
-                                            max_tokens=128)
+                                            max_tokens=1024)
     return completion.choices[0].text
 
 def generate_audio(response, file_name, lang):

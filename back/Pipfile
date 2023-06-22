@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 fastapi = "==0.97.0"
-uvicorn = "==0.22.0"
+uvicorn = "*"
 pymongo = "==4.3.3"
 passlib = "==1.7.4"
 pyttsx3 = "==2.90"

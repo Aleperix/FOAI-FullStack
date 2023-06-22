@@ -39,7 +39,7 @@ const UserProperties = () => {
                     data-bs-toggle="dropdown">
                     <i className={store.currentTheme === "light" ? "bi bi-sun-fill" : "bi bi-moon-stars-fill"}></i>
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text" onClick={(e) => e.stopPropagation()}>
                     <li>
                         <button type="button" className="dropdown-item d-flex align-items-center" title={txt?.tooltipLight} data-bs-theme-value="light" aria-pressed="false" onClick={() => setTheme('light')}>
                             <i className="bi bi-sun-fill me-2 opacity-50 theme-icon" width="1em" height="1em"></i>
